@@ -7,9 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "start": "vite preview", 
+    "start": "vite preview",
     "preview": "vite preview",
-    "postinstall": "npm install"
+    "postinstall": "npm install && npm install vite"  
   },
   "keywords": [],
   "author": "",
