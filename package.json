@@ -5,9 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel src/index.html",  
-    "build": "parcel build src/index.html", 
+    "build": "parcel build src/index.html",
     "lint": "eslint .",
-    "preview": "parcel serve dist"
+    "start": "parcel src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,6 @@
     "serve": "^14.2.4"
   },
   "devDependencies": {
-    "parcel": "^2.8.3",
-    "eslint": "^8.0.0"
+    "parcel": "^2.8.3"
   }
 }
