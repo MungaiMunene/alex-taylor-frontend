@@ -7,8 +7,7 @@
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "lint": "eslint .",
-    "start": "parcel src/index.html",
-    "postinstall": "npm install parcel"
+    "start": "parcel src/index.html"
   },
   "keywords": [],
   "author": "",
