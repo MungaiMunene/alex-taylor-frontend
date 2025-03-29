@@ -1,0 +1,7 @@
+[build]
+  publish = "dist" # Specify your build folder, typically "dist" or "build"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
