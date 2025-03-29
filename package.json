@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "start": "vite",
+    "preview": "vite preview",
     "postinstall": "npm install"
   },
   "keywords": [],
