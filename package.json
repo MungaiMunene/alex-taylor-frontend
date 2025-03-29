@@ -1,13 +1,13 @@
 {
   "name": "alex-taylor-frontend",
   "version": "1.0.0",
-  "description": "React + Vite + Parcel",
+  "description": "React + Parcel",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
-    "build": "parcel build",
+    "dev": "parcel src/index.html",  
+    "build": "parcel build src/index.html", 
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "parcel serve dist"
   },
   "keywords": [],
   "author": "",
@@ -19,8 +19,7 @@
     "serve": "^14.2.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.2.0",
-    "parcel": "^2.8.3"
+    "parcel": "^2.8.3",
+    "eslint": "^8.0.0"
   }
 }
