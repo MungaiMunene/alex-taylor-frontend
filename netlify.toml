@@ -2,6 +2,11 @@
   publish = "dist"  # Specify your build folder, typically "dist" or "build"
 
 [[headers]]
-  for = "*.js"  # Apply this header to all .js files
+  for = "/*.js"
   [headers.values]
-    Content-Type = "application/javascript"  # Ensure that .js files are served with the correct MIME type
+    Content-Type = "application/javascript"  # Ensure .js files are served with the correct MIME type
+
+[[headers]]
+  for = "/index.html"  # For HTML file
+  [headers.values]
+    Content-Type = "text/html"
