@@ -5,15 +5,15 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: 'dist',   // Ensure output is correct
-    target: 'esnext', // Make sure it's modern JS
+    outDir: 'dist', // Ensure output is correct
+    target: 'esnext', // Ensure it's modern JS
     rollupOptions: {
       output: {
-        format: 'es',  // Ensure correct module format
+        format: 'es',  // Make sure the format is 'es' for JavaScript modules
       },
     },
   },
-  base: '/',  // Ensure that routing works properly for SPAs
+  base: '/',  // Ensure proper routing for SPAs
   server: {
     port: 3000,
   },
