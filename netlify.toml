@@ -1,7 +1,7 @@
 [build]
-  publish = "dist" # Specify your build folder, typically "dist" or "build"
+  publish = "dist"  # Specify your build folder, typically "dist" or "build"
 
 [[headers]]
-  for = "/*.js"
+  for = "*.js"  # Apply this header to all .js files
   [headers.values]
-    Content-Type = "application/javascript"
+    Content-Type = "application/javascript"  # Ensure that .js files are served with the correct MIME type
