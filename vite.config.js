@@ -5,14 +5,16 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    // Ensure that the output directory is set to "dist" (default), but you can customize if needed
-    outDir: 'dist',  // Make sure the build outputs to the 'dist' folder
-    target: 'esnext',  // Ensures the code is optimized for modern browsers
+    outDir: 'dist',   // Ensure output is correct
+    target: 'esnext', // Make sure it's modern JS
+    rollupOptions: {
+      output: {
+        format: 'es',  // Ensure correct module format
+      },
+    },
   },
-  base: '/',  // The base URL is essential for single-page applications (SPA)
+  base: '/',  // Ensure that routing works properly for SPAs
   server: {
-    port: 3000,  // Port to run the dev server on (if needed)
+    port: 3000,
   },
-  // Optional: If you have any public assets like images, make sure they are handled correctly
-  publicDir: 'public',  // Ensure assets in the public directory are served properly
 });
