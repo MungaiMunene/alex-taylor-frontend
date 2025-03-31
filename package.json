@@ -4,12 +4,11 @@
   "description": "React + Vite",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "start": "vite",
-    "preview": "vite preview",
-    "postinstall": "npm install"
+    "dev": "vite",  
+    "build": "vite build",  
+    "lint": "eslint .",  
+    "start": "vite preview", 
+    "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.8.4",
