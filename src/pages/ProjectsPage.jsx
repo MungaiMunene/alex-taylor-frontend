@@ -7,7 +7,7 @@ function ProjectsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/api/projects')
+    api.get('/projects')  // ✅ Removed '/api'
       .then(response => {
         setProjects(response.data);
         setLoading(false);
