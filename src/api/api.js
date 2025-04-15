@@ -1,9 +1,8 @@
 // src/api.js
 import axios from 'axios';
 
-// 🔧 Temporary fix: hardcode the deployed backend URL
 const api = axios.create({
-  baseURL: 'https://alex-taylor-backend-1.onrender.com/api'
+  baseURL: 'https://alex-taylor-backend-1.onrender.com/api'  // ✅ Hardcoded
 });
 
 export default api;
