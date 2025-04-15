@@ -7,13 +7,26 @@ function ProjectsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/projects')  // ✅ Removed '/api'
+    console.log("📡 Fetching from:", 'https://alex-taylor-backend-1.onrender.com/api/projects');
+
+    api.get('/projects')
       .then(response => {
+        console.log("✅ Fetched Projects:", response.data);
         setProjects(response.data);
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching projects:', error);
+        // 🔍 Better error visibility
+        if (error.response) {
+          // Server responded but with a bad status (e.g. 404, 500)
+          console.error("❌ Server Error:", error.response.status, error.response.data);
+        } else if (error.request) {
+          // No response received
+          console.error("❌ No response received:", error.request);
+        } else {
+          // Something else went wrong
+          console.error("❌ Request setup error:", error.message);
+        }
         setLoading(false);
       });
   }, []);
