@@ -7,6 +7,7 @@ function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(false); // ✅ Add loading state
 
   useEffect(() => {
     async function loadProfileAndWelcome() {
@@ -14,7 +15,7 @@ function ChatPage() {
         const userData = await fetchUserProfile();
         setProfile(userData);
 
-        // Add the personalized welcome message once the profile is loaded
+        // Personalized welcome
         setMessages([
           {
             sender: "Alex",
@@ -29,20 +30,37 @@ function ChatPage() {
     loadProfileAndWelcome();
   }, []);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (input.trim() === "") return;
 
     // Add user's message
     setMessages(prev => [...prev, { sender: "You", text: input }]);
+    const userInput = input; // save input before clearing
     setInput("");
+    setLoading(true); // start loading
 
-    // Simulate Alex's response (placeholder)
-    setTimeout(() => {
-      setMessages(prev => [...prev, {
-        sender: "Alex",
-        text: "I'm thinking about your request... 🤔 (soon connected to OpenAI)"
-      }]);
-    }, 1000);
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/chat/', {  // ✅ Real backend route
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userInput }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessages(prev => [...prev, { sender: "Alex", text: data.reply }]);
+      } else {
+        setMessages(prev => [...prev, { sender: "Alex", text: "Hmm, I couldn't process your request properly. ❓" }]);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setMessages(prev => [...prev, { sender: "Alex", text: "Network error. Please try again later." }]);
+    } finally {
+      setLoading(false); // stop loading
+    }
   };
 
   return (
@@ -55,6 +73,13 @@ function ChatPage() {
             <strong>{msg.sender}:</strong> {msg.text}
           </div>
         ))}
+
+        {/* ✅ Show a typing indicator */}
+        {loading && (
+          <div style={{ marginBottom: '0.75rem', textAlign: 'left', fontStyle: 'italic', color: 'gray' }}>
+            Alex is typing...
+          </div>
+        )}
       </div>
 
       <div style={{ display: 'flex' }}>
@@ -68,8 +93,9 @@ function ChatPage() {
         <button
           onClick={handleSend}
           style={{ marginLeft: '0.5rem', padding: '0.5rem 1rem', borderRadius: '4px', background: '#4CAF50', color: 'white', border: 'none' }}
+          disabled={loading} // ✅ Disable button while loading
         >
-          Send
+          {loading ? '...' : 'Send'}
         </button>
       </div>
     </div>
