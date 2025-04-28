@@ -5,8 +5,9 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import ProjectsPage from './pages/ProjectsPage';
 import MetricsPage from './pages/MetricsPage';
 import ReportsPage from './pages/ReportsPage';
+import DashboardPage from './pages/DashboardPage'; // ✅ Import DashboardPage
 import ContractForm from './components/ContractForm';
-import { fetchUserProfile } from './Services/userProfileService'; // ✅ Import corrected
+import { fetchUserProfile } from './Services/userProfileService'; // ✅ Corrected path
 
 function App() {
   const location = useLocation();
@@ -16,7 +17,7 @@ function App() {
     async function loadProfile() {
       try {
         const userData = await fetchUserProfile();
-        console.log('✅ User Profile loaded:', userData); // ✅ Confirm profile loaded
+        console.log('✅ User Profile loaded:', userData);
         setProfile(userData);
       } catch (error) {
         console.error('Failed to load user profile:', error);
@@ -52,6 +53,17 @@ function App() {
 
         {/* Navigation */}
         <nav style={{ marginBottom: '1rem' }}>
+          <Link
+            to="/dashboard"
+            style={{
+              marginRight: '1rem',
+              fontWeight: location.pathname === '/dashboard' ? 'bold' : 'normal',
+              textDecoration: location.pathname === '/dashboard' ? 'underline' : 'none',
+            }}
+          >
+            Dashboard
+          </Link>
+
           <Link
             to="/"
             style={{
@@ -101,6 +113,7 @@ function App() {
       {/* Main Content */}
       <main>
         <Routes>
+          <Route path="/dashboard" element={<DashboardPage />} /> {/* ✅ Dashboard route */}
           <Route path="/" element={<ProjectsPage />} />
           <Route path="/metrics" element={<MetricsPage />} />
           <Route path="/reports" element={<ReportsPage />} />
