@@ -1,13 +1,13 @@
-// src/pages/ChatPage.jsx
-
 import React, { useState, useEffect } from 'react';
-import { fetchUserProfile } from '../Services/userProfileService'; // ✅ fetch profile for personalized welcome
+import { fetchUserProfile } from '../Services/userProfileService'; // ✅ fetch profile
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(false); // ✅ loading state
+  const [loading, setLoading] = useState(false);
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // ✅ Pull from .env
 
   useEffect(() => {
     async function loadProfileAndWelcome() {
@@ -15,7 +15,6 @@ function ChatPage() {
         const userData = await fetchUserProfile();
         setProfile(userData);
 
-        // Personalized welcome
         setMessages([
           {
             sender: "Alex",
@@ -33,14 +32,13 @@ function ChatPage() {
   const handleSend = async () => {
     if (input.trim() === "") return;
 
-    // Add user's message
     setMessages(prev => [...prev, { sender: "You", text: input }]);
-    const userInput = input; // save input before clearing
+    const userInput = input;
     setInput("");
-    setLoading(true); // start loading
+    setLoading(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/chat/ask', {  // ✅ fixed route here!
+      const response = await fetch(`${API_BASE_URL}/chat/ask`, {  // ✅ correct deployed route
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +57,7 @@ function ChatPage() {
       console.error('Error sending message:', error);
       setMessages(prev => [...prev, { sender: "Alex", text: "Network error. Please try again later." }]);
     } finally {
-      setLoading(false); // stop loading
+      setLoading(false);
     }
   };
 
@@ -67,16 +65,31 @@ function ChatPage() {
     <div style={{ fontFamily: 'Arial, sans-serif', padding: '2rem', maxWidth: '600px', margin: 'auto' }}>
       <h2 style={{ marginBottom: '1rem' }}>💬 Chat with Alex Taylor</h2>
 
-      <div style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '1rem', height: '400px', overflowY: 'auto', backgroundColor: '#f9f9f9', marginBottom: '1rem' }}>
+      <div style={{
+        border: '1px solid #ccc',
+        borderRadius: '8px',
+        padding: '1rem',
+        height: '400px',
+        overflowY: 'auto',
+        backgroundColor: '#f9f9f9',
+        marginBottom: '1rem'
+      }}>
         {messages.map((msg, index) => (
-          <div key={index} style={{ marginBottom: '0.75rem', textAlign: msg.sender === "Alex" ? 'left' : 'right' }}>
+          <div key={index} style={{
+            marginBottom: '0.75rem',
+            textAlign: msg.sender === "Alex" ? 'left' : 'right'
+          }}>
             <strong>{msg.sender}:</strong> {msg.text}
           </div>
         ))}
 
-        {/* ✅ Typing indicator */}
         {loading && (
-          <div style={{ marginBottom: '0.75rem', textAlign: 'left', fontStyle: 'italic', color: 'gray' }}>
+          <div style={{
+            marginBottom: '0.75rem',
+            textAlign: 'left',
+            fontStyle: 'italic',
+            color: 'gray'
+          }}>
             Alex is typing...
           </div>
         )}
@@ -88,12 +101,24 @@ function ChatPage() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          style={{ flex: 1, padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}
+          style={{
+            flex: 1,
+            padding: '0.5rem',
+            borderRadius: '4px',
+            border: '1px solid #ccc'
+          }}
         />
         <button
           onClick={handleSend}
-          style={{ marginLeft: '0.5rem', padding: '0.5rem 1rem', borderRadius: '4px', background: '#4CAF50', color: 'white', border: 'none' }}
-          disabled={loading} // ✅ Disable button while sending
+          style={{
+            marginLeft: '0.5rem',
+            padding: '0.5rem 1rem',
+            borderRadius: '4px',
+            background: '#4CAF50',
+            color: 'white',
+            border: 'none'
+          }}
+          disabled={loading}
         >
           {loading ? '...' : 'Send'}
         </button>
