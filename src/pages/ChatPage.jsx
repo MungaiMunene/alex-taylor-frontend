@@ -9,8 +9,8 @@ function ChatPage() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // ✅ Pull from .env
-
+  // src/pages/ChatPage.jsx
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Pull from .env
   useEffect(() => {
     async function loadProfileAndWelcome() {
       try {
