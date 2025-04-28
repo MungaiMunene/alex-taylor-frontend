@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import ProjectsPage from './pages/ProjectsPage';
