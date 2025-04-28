@@ -1,12 +1,8 @@
-// src/Services/userProfileService.js
+import { fetchWithRetry } from './fetchWithRetry'; // Import the retry helper
 
 export async function fetchUserProfile() {
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Get from .env
-    const response = await fetch(`${API_BASE_URL}/user-profile`);
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Get from .env
+  const url = `${API_BASE_URL}/user-profile`;
   
-    if (!response.ok) {
-      throw new Error('Failed to fetch user profile');
-    }
-  
-    return await response.json();
-  }
+  return await fetchWithRetry(url);
+}
