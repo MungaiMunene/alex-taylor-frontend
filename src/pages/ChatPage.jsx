@@ -7,7 +7,7 @@ function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(false); // ✅ Add loading state
+  const [loading, setLoading] = useState(false); // ✅ loading state
 
   useEffect(() => {
     async function loadProfileAndWelcome() {
@@ -40,7 +40,7 @@ function ChatPage() {
     setLoading(true); // start loading
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/chat/', {  // ✅ Real backend route
+      const response = await fetch('http://127.0.0.1:5000/api/chat/ask', {  // ✅ fixed route here!
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function ChatPage() {
           </div>
         ))}
 
-        {/* ✅ Show a typing indicator */}
+        {/* ✅ Typing indicator */}
         {loading && (
           <div style={{ marginBottom: '0.75rem', textAlign: 'left', fontStyle: 'italic', color: 'gray' }}>
             Alex is typing...
@@ -93,7 +93,7 @@ function ChatPage() {
         <button
           onClick={handleSend}
           style={{ marginLeft: '0.5rem', padding: '0.5rem 1rem', borderRadius: '4px', background: '#4CAF50', color: 'white', border: 'none' }}
-          disabled={loading} // ✅ Disable button while loading
+          disabled={loading} // ✅ Disable button while sending
         >
           {loading ? '...' : 'Send'}
         </button>
