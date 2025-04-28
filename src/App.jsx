@@ -1,9 +1,12 @@
+// src/App.jsx
+
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import ProjectsPage from './pages/ProjectsPage';
 import MetricsPage from './pages/MetricsPage';
 import ReportsPage from './pages/ReportsPage';
-import DashboardPage from './pages/DashboardPage'; // ✅ Import DashboardPage
+import DashboardPage from './pages/DashboardPage';
+import ChatPage from './pages/ChatPage'; // ✅ New: Import ChatPage
 import ContractForm from './components/ContractForm';
 import { fetchUserProfile } from './Services/userProfileService'; // ✅ Corrected path
 
@@ -98,12 +101,23 @@ function App() {
           <Link
             to="/create-contract"
             style={{
-              marginLeft: '1rem',
+              marginRight: '1rem',
               fontWeight: location.pathname === '/create-contract' ? 'bold' : 'normal',
               textDecoration: location.pathname === '/create-contract' ? 'underline' : 'none',
             }}
           >
             Create Contract
+          </Link>
+
+          <Link
+            to="/chat"
+            style={{
+              marginLeft: '1rem',
+              fontWeight: location.pathname === '/chat' ? 'bold' : 'normal',
+              textDecoration: location.pathname === '/chat' ? 'underline' : 'none',
+            }}
+          >
+            Chat
           </Link>
         </nav>
       </header>
@@ -111,11 +125,12 @@ function App() {
       {/* Main Content */}
       <main>
         <Routes>
-          <Route path="/dashboard" element={<DashboardPage />} /> {/* ✅ Dashboard route */}
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/" element={<ProjectsPage />} />
           <Route path="/metrics" element={<MetricsPage />} />
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/create-contract" element={<ContractForm />} />
+          <Route path="/chat" element={<ChatPage />} /> {/* ✅ New Chat route */}
         </Routes>
       </main>
     </div>
