@@ -1,3 +1,5 @@
+// src/pages/ChatPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import { fetchUserProfile } from '../Services/userProfileService'; // ✅ fetch profile
 
@@ -38,7 +40,7 @@ function ChatPage() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/chat/ask`, {  // ✅ correct deployed route
+      const response = await fetch(`${API_BASE_URL}/chat/ask`, {  // ✅ Deployed backend route
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
